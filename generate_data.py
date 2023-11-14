@@ -2,12 +2,18 @@ import cv2
 import numpy as np
 import os
 
-"""
-This program assumes the proper file stricture and naming scheme
-"""
+
+# ---------------------------------------------------------------------------- #
+# This script takes data masks and cropped image data of hand-drawn components
+# and adds them to backgrounds to make synthetic data for training my
+# object detection model.
+#
+# This script assumes the proper file stricture and naming scheme       
+# ---------------------------------------------------------------------------- #
+
 
 # File Paths
-# Path to classes folder
+# Path to images folder containing cropped images and masks
 IMAGES_DIR = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\synthetic_data\\"
 # Path to background images
 BG_DIR = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\synthetic_data\bg\\"

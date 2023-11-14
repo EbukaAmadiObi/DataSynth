@@ -1,9 +1,16 @@
 import cv2
 import os
 
-DATASET_PATH = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\source_datasets\Digital_Circuit_Component\\"
-OUTPUT_PATH = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\cropped_images\images_d_gates\\"
-CLASSLIST = ['AND', 'NAND', 'NOR', 'NOT', 'OR', 'XNOR', 'XOR']
+# ---------------------------------------------------------------------------- #
+# This program takes pre-annotated image data and crops on the annotations to 
+# create smaller images to be masked and used in the creation of synthetic
+# object deteciton data
+# ---------------------------------------------------------------------------- #
+
+
+DATASET_PATH = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\source_datasets\digi_smybols\\"
+OUTPUT_PATH = r"C:\Users\Ebuka Amadi-Obi\Documents\GitHub\BreadBuddy\cropped_images\digi-sym\\"
+CLASSLIST = ['AC_Source', 'BJT', 'Battery', 'Capacitor', 'Current_Source', 'DC_Source', 'Diode', 'Ground', 'Inductor', 'MOSFET', 'Resistor', 'Voltage_Source']
 CLASSNUMBER = len(CLASSLIST)
 CROP_BUFFER = 0
 
@@ -11,7 +18,7 @@ CROP_BUFFER = 0
 file_number_dict = dict(zip(range(CLASSNUMBER),([0]*CLASSNUMBER)))
         
 for image_file in os.listdir(DATASET_PATH+r"images"):
-    print("Cropping images in " + image_file)
+    print("\nCropping images in " + image_file)
 
     # Load the image
     image = cv2.imread(DATASET_PATH+r"images\\"+image_file)
@@ -75,4 +82,8 @@ for image_file in os.listdir(DATASET_PATH+r"images"):
         file_number_dict[int(class_index)] = file_number+1
 
         # Write image file
-        cv2.imwrite((output_image_path +"\\"+ output_image_filename), cropped_image)       
+        cv2.imwrite((output_image_path +"\\"+ output_image_filename), cropped_image)   
+
+        print("     Wrote: " + output_image_filename)    
+
+print("All Done!")
